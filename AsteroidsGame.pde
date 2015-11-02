@@ -1,4 +1,4 @@
-//your variable declarations here
+
 SpaceShip ships = new SpaceShip();
 public void setup() 
 {
@@ -7,15 +7,27 @@ public void setup()
 }
 public void draw() 
 {
+  
   ships.show();
 }
+
 public void keyPressed()
 {
-  if( key == 'h')
+  if( key == 'd')
   {
-    myDirection += (int)(Math.random() * 10 + 1);
+    ships.setPointDirection(270);
   }
+  if (key == 'e')
+  {
+    ships.setDirectionX((int)Math.random() * 400);
+  }
+  if (key == 'f')
+  {
+    ships.setDirectionY((int)Math.random() * 400);
+  }
+  
 }
+
 class SpaceShip extends Floater
 {   
   
@@ -35,9 +47,9 @@ class SpaceShip extends Floater
     myColor = color(0,255,255);
     myCenterX = 200;
     myCenterY = 200;
-    myDirectionX = -5;
-    myDirectionY = 0;
-    myPointDirection = 180; 
+    myDirectionX += myDirectionX;
+    myDirectionY += myDirectionY;
+    myPointDirection += myPointDirection; 
   }
     public void setX(int x) { myCenterX = x;}
     public int getX() {return (int)myCenterX;}

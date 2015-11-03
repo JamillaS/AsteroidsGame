@@ -7,23 +7,39 @@ public void setup()
 }
 public void draw() 
 {
-  
+  background(197);
+  ships.move();
   ships.show();
 }
 
 public void keyPressed()
 {
-  if( key == 'd')
+  if(key == 'z')
   {
-    ships.setPointDirection(270);
+    background(197);
+    ships.setX((int)(Math.random() * 400));
+    ships.setY((int)(Math.random() * 400));
   }
-  if (key == 'e')
+  if(key == 'f')
   {
-    ships.setDirectionX((int)Math.random() * 400);
+    
+    background(197);
+    ships.rotate(10);
+    ships.getPointDirection(); 
   }
-  if (key == 'f')
+  if(key == 's')
   {
-    ships.setDirectionY((int)Math.random() * 400);
+    
+    background(197);
+    ships.rotate(-10);
+    ships.getPointDirection();
+  }
+  if(key == 'd')
+  {
+    background(197);
+    ships.accelerate(Math.random());
+    ships.getDirectionX();
+    ships.getDirectionY();
   }
   
 }
@@ -36,20 +52,21 @@ class SpaceShip extends Floater
     corners = 4;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = -8;
+    xCorners[0] = 16;
     xCorners[1] = -8;
     xCorners[2] = -2;
-    xCorners[3] = 16;
-    yCorners[0] = 8;
+    xCorners[3] = -8;
+    yCorners[0] = 0;
     yCorners[1] = -8;
     yCorners[2] = 0;
-    yCorners[3] = 0;
+    yCorners[3] = 8;
+
     myColor = color(0,255,255);
     myCenterX = 200;
     myCenterY = 200;
-    myDirectionX += myDirectionX;
-    myDirectionY += myDirectionY;
-    myPointDirection += myPointDirection; 
+    myDirectionX += 0;
+    myDirectionY += 0;
+    myPointDirection =0; 
   }
     public void setX(int x) { myCenterX = x;}
     public int getX() {return (int)myCenterX;}

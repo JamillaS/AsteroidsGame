@@ -1,46 +1,77 @@
 
 SpaceShip ships = new SpaceShip();
+Star[] stars = new Star[500];
 public void setup() 
 {
   size(400, 400);
-  //your code here
+  for(int i = 0; i < stars.length; i ++)
+  {
+    stars[i] = new Star();
+  }
 }
 public void draw() 
 {
-  background(197);
+  background(0);
+  for(int i = 0; i < stars.length; i ++)
+  {
+    stars[i].show();
+  }
+  
   ships.move();
   ships.show();
+  
 }
+class Star
+{
+  private int xPos;
+  private int yPos;
+  Star()
+  {
+    xPos = ((int)(Math.random() * 400));
+    yPos = ((int)(Math.random() * 400));
+  }
+  public void show()
+  {
+      noStroke();
+      fill(255);
+      ellipse(xPos, yPos, 2, 2);
 
+  }
+}
 public void keyPressed()
 {
-  if(key == 'z')
+  if(key == 'z')//hyperspace
   {
-    background(197);
-    ships.setX((int)(Math.random() * 400));
-    ships.setY((int)(Math.random() * 400));
+    //background(0);
+    ships.setX((int)(Math.random() * 380 + 10));
+    ships.setY((int)(Math.random() * 380 + 10));
+    ships.setDirectionX(0);
+    ships.setDirectionY(0);
   }
-  if(key == 'f')
+  if(key == 'f')//rotates clockwise
   {
-    
-    background(197);
     ships.rotate(10);
     ships.getPointDirection(); 
   }
-  if(key == 's')
+  if(key == 's')//rotates counter-clockwise
   {
-    
-    background(197);
     ships.rotate(-10);
     ships.getPointDirection();
   }
-  if(key == 'd')
+  if(key == 'd')//move forward
   {
-    background(197);
     ships.accelerate(Math.random());
     ships.getDirectionX();
     ships.getDirectionY();
   }
+  
+  if(key == 'e')//move backwards
+  {
+    ships.accelerate(Math.random() - 1);
+    ships.getDirectionX();
+    ships.getDirectionY();
+  }
+  
   
 }
 

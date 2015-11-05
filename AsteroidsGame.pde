@@ -5,7 +5,8 @@ public void setup()
 {
   size(400, 400);
   for(int i = 0; i < stars.length; i ++)
-  {
+  { 
+    
     stars[i] = new Star();
   }
 }
@@ -14,6 +15,7 @@ public void draw()
   background(0);
   for(int i = 0; i < stars.length; i ++)
   {
+
     stars[i].show();
   }
   
@@ -21,6 +23,7 @@ public void draw()
   ships.show();
   
 }
+
 class Star
 {
   private int xPos;
@@ -33,16 +36,26 @@ class Star
   public void show()
   {
       noStroke();
+      
       fill(255);
       ellipse(xPos, yPos, 2, 2);
 
   }
 }
+/*
+class Jumbo extends Star
+{
+  public void show(){
+    fill(0);
+    ellipse(xPos, yPos, 5, 5);
+  }
+  
+}
+*/
 public void keyPressed()
 {
   if(key == 'z')//hyperspace
   {
-    //background(0);
     ships.setX((int)(Math.random() * 380 + 10));
     ships.setY((int)(Math.random() * 380 + 10));
     ships.setDirectionX(0);

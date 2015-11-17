@@ -38,8 +38,17 @@ public void draw()
     asteroids[ni].move();
     asteroids[ni].show();
   }
-  
+  /*
+  if((get(ships.getX(),ships.getY())) == color(197))
+  {
+    ships.setX(1);
+    ships.setY(1);
+    ships.setPointDirection(0);
+    ships.setDirectionX(0);
+    ships.setDirectionY(0);
 
+  }
+*/
   
 }
 
@@ -112,23 +121,23 @@ class Asteroid extends Floater
   private int speedOfRotation;
   public Asteroid()
   {
-    //speedOfRotation = 0;
-    speedOfRotation = ((int)(Math.random() * 2) -1);
+    
+    speedOfRotation = ((int)(Math.random() * 10) -5);
     corners = 6;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = -11;
-    xCorners[1] = -5;
-    xCorners[2] = -11;
-    xCorners[3] = 0;
-    xCorners[4] = 5;
-    xCorners[5] = 10;
-    yCorners[0] = 11;
-    yCorners[1] = -5;
-    yCorners[2] = -11;
-    yCorners[3] = 0;
+    xCorners[0] = -10;
+    xCorners[1] = -15;
+    xCorners[2] = -10;
+    xCorners[3] = 5;
+    xCorners[4] = 10;
+    xCorners[5] = 5;
+    yCorners[0] = 10;
+    yCorners[1] = 5;
+    yCorners[2] = -10;
+    yCorners[3] = -10;
     yCorners[4] = 5;
-    yCorners[5] = 0;
+    yCorners[5] = 10;
 
     myColor = color(197);
     myCenterX = ((int)(Math.random() * 400));
@@ -141,7 +150,7 @@ class Asteroid extends Floater
   {
     myCenterX += (myDirectionX + (Math.random() * 5));    
     myCenterY += (myDirectionX + (Math.random() * 5)); 
-    rotate(speedOfRotation-90);
+    rotate(speedOfRotation);
     super.move();
   }
   

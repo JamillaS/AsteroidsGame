@@ -1,4 +1,6 @@
 Asteroid[] asteroids = new Asteroid[7];
+
+
 SpaceShip ships = new SpaceShip();
 Star[] stars = new Star[500];
 public void setup() 
@@ -10,6 +12,7 @@ public void setup()
     asteroids[ni] = new Asteroid();
   }
    
+ 
 
   for(int i = 0; i < 400; i ++)
   { 
@@ -38,17 +41,22 @@ public void draw()
     asteroids[ni].move();
     asteroids[ni].show();
   }
+  
+ 
   /*
   if((get(ships.getX(),ships.getY())) == color(197))
   {
-    ships.setX(1);
-    ships.setY(1);
+
+    ships.setX(0);
+    ships.setY(0);
+    asteroids[0].setX(0);
+    asteroids[0].setY(0);
     ships.setPointDirection(0);
     ships.setDirectionX(0);
     ships.setDirectionY(0);
 
   }
-*/
+  */
   
 }
 

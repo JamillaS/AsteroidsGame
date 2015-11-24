@@ -15,8 +15,12 @@ public void setup()
   }
    */
    
-theList = new ArrayList <Asteroid> (1);
-theList.add(new Asteroid(1));
+theList = new ArrayList <Asteroid> ();
+for(int j = 0; j < 8; j++)
+{
+  theList.add(new Asteroid());
+}
+
 
   for(int i = 0; i < 400; i ++)
   { 
@@ -40,12 +44,23 @@ public void draw()
   ships.move();
   ships.show();
 
+  for(int ni = 0; ni < theList.size(); ni ++)
+  {
+    
+    theList.get(ni).move();
+    theList.get(ni).show();
+  }
+  //if(dist(theList.getX(),theList.getY(),ships.getX(), ships.getY())){
+
+  //}
+
+/*
   for(int ni = 0; ni < asteroids.length; ni ++)
   {
     asteroids[ni].move();
     asteroids[ni].show();
   }
-  
+  */
  
   /*
   if((get(ships.getX(),ships.getY())) == color(197))
@@ -166,6 +181,7 @@ class Asteroid extends Floater
    
     rotate(speedOfRotation);
     super.move();
+
   }
   
   public void setX(int x) { myCenterX = x;}

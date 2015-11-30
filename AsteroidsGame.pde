@@ -1,4 +1,5 @@
 //Asteroid[] asteroids = new Asteroid[7];
+double distances;
 ArrayList <Asteroid> theList;
 //theList = new ArrayList <Asteroid>();
 
@@ -49,10 +50,16 @@ public void draw()
     
     theList.get(ni).move();
     theList.get(ni).show();
-  }
-  //if(dist(theList.getX(),theList.getY(),ships.getX(), ships.getY())){
+    distances = dist(theList.get(ni).getX(),theList.get(ni).getY(),ships.getX(), ships.getY());
+    if(distances < 20)
+    {
+        theList.remove(ni);
 
-  //}
+    }
+
+    
+  }
+  
 
 /*
   for(int ni = 0; ni < asteroids.length; ni ++)

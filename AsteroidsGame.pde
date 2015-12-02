@@ -1,6 +1,6 @@
 //Asteroid[] asteroids = new Asteroid[7];
 double distances;
-ArrayList <Asteroid> theList;
+ArrayList <Asteroid> asteroids;
 ArrayList <Bullet> bullets;
 SpaceShip ships = new SpaceShip();
 Star[] stars = new Star[500];
@@ -9,11 +9,13 @@ public void setup()
   
   size(400, 400);
    
-theList = new ArrayList <Asteroid> ();
+asteroids = new ArrayList <Asteroid> ();
 for(int j = 0; j < 8; j++)
 {
-  theList.add(new Asteroid());
+  asteroids.add(new Asteroid());
 }
+
+bullets = new ArrayList <Bullet> ();
 
 
   for(int i = 0; i < 400; i ++)
@@ -38,18 +40,22 @@ public void draw()
   ships.move();
   ships.show();
 
-  //bullets.move();
-  //bullets.show();
+  for(int b = 0; b < bullets.size(); b ++)
+  {
+    bullets.get(b).move();
+    bullets.get(b).show();
 
-  for(int ni = 0; ni < theList.size(); ni ++)
+  }
+
+  for(int ni = 0; ni < asteroids.size(); ni ++)
   {
     
-    theList.get(ni).move();
-    theList.get(ni).show();
-    distances = dist(theList.get(ni).getX(),theList.get(ni).getY(),ships.getX(), ships.getY());
+    asteroids.get(ni).move();
+    asteroids.get(ni).show();
+    distances = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(),ships.getX(), ships.getY());
     if(distances < 20)
     {
-        theList.remove(ni);
+        asteroids.remove(ni);
 
     }
 
@@ -83,8 +89,10 @@ public void draw()
 }
 class Bullet extends Floater
 {
+  private int moveBullet;
   public Bullet()
   {
+    moveBullet = 0;
     myCenterX = 200;
     myCenterY = 200;
     myPointDirection = 0;
@@ -92,10 +100,26 @@ class Bullet extends Floater
     myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
     myDirectionY = 5 * Math.sin(dRadians) + myDirectionY;
   }
+  public void move()
+  {
+    moveBullet += 10;
+  }
+  
   public void show()
   {
     fill(255, 0, 0);
-    ellipse(ships.getX(), ships.getY() , 10, 10);
+    
+    if(ships.getPointDirection() > 0)
+    {
+      ellipse(ships.getX() + moveBullet, ships.getY() , 5, 10);
+    }
+    if(ships.getPointDirection() < 0)
+    {
+      ellipse(ships.getX() - 2 * moveBullet, ships.getY() , 5, 10);
+    }
+    
+
+
   }
   public void setX(int x) { myCenterX = x;}
   public int getX() {return (int)myCenterX;}
@@ -170,6 +194,10 @@ public void keyPressed()
     ships.getDirectionX();
     ships.getDirectionY();
   }
+  if(key == 'l')
+  {
+    bullets.add(new Bullet());
+  }
   
   
 }
@@ -188,13 +216,13 @@ class Asteroid extends Floater
     xCorners[1] = -15;
     xCorners[2] = -10;
     xCorners[3] = 5;
-    xCorners[4] = 10;
+    xCorners[4] = 10; 
     xCorners[5] = 5;
     yCorners[0] = 10;
     yCorners[1] = 5;
     yCorners[2] = -10;
     yCorners[3] = -10;
-    yCorners[4] = 5;
+    yCorners[4] = 5; 
     yCorners[5] = 10;
 
     myColor = color(197);
@@ -236,11 +264,11 @@ class SpaceShip extends Floater
     corners = 4;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = 16;
+    xCorners[0] = 16; //head
     xCorners[1] = -8;
     xCorners[2] = -2;
     xCorners[3] = -8;
-    yCorners[0] = 0;
+    yCorners[0] = 0; //head
     yCorners[1] = -8;
     yCorners[2] = 0;
     yCorners[3] = 8;

@@ -90,8 +90,10 @@ public void draw()
 class Bullet extends Floater
 {
   private int moveBullet;
+  private int moveBullets;
   public Bullet()
   {
+    moveBullets = 0;
     moveBullet = 0;
     myCenterX = 200;
     myCenterY = 200;
@@ -103,19 +105,20 @@ class Bullet extends Floater
   public void move()
   {
     moveBullet += 10;
+    moveBullets -= 10;
   }
   
   public void show()
   {
     fill(255, 0, 0);
     
-    if(ships.getPointDirection() > 0)
+    if(ships.getPointDirection() >= 0)
     {
       ellipse(ships.getX() + moveBullet, ships.getY() , 5, 10);
     }
-    if(ships.getPointDirection() < 0)
+    else if(ships.getPointDirection() < 0)
     {
-      ellipse(ships.getX() - 2 * moveBullet, ships.getY() , 5, 10);
+      ellipse(ships.getX() + moveBullets, ships.getY() , 5, 10);
     }
     
 

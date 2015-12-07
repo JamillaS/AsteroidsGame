@@ -112,15 +112,20 @@ class Bullet extends Floater
   {
     fill(255, 0, 0);
     
-    if(ships.getPointDirection() >= 0)
+    if(ships.getPointDirection() == 0)
     {
-      ellipse(ships.getX() + moveBullet, ships.getY() , 5, 10);
+      ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
     }
-    else if(ships.getPointDirection() < 0)
+    else if(ships.getPointDirection() > 0 && ships.getPointDirection() < 90)
     {
-      ellipse(ships.getX() + moveBullets, ships.getY() , 5, 10);
+      ellipse(ships.getX() + moveBullet, ships.getY() + moveBullet , 5, 10);
+    }
+    else if(ships.getPointDirection() == 90)
+    {
+      
     }
     
+    //ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
 
 
   }

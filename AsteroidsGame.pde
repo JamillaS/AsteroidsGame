@@ -104,27 +104,52 @@ class Bullet extends Floater
   }
   public void move()
   {
-    moveBullet += 10;
+    moveBullets = (int)ships.getPointDirection();
+    //moveBullet += 10;
     moveBullets -= 10;
   }
   
   public void show()
   {
     fill(255, 0, 0);
-    
-    if(ships.getPointDirection() == 0)
+    for ( int bi = 0; bi < 370; bi += 10)
+    {
+      ellipse(ships.getX(), ships.getY() , 5, 10);
+    }
+    /*
+    if(ships.getPointDirection() > -10 && ships.getPointDirection() < 10)
     {
       ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
     }
-    else if(ships.getPointDirection() > 0 && ships.getPointDirection() < 90)
+    else if(ships.getPointDirection() >= 10 && ships.getPointDirection() <= 80)
     {
       ellipse(ships.getX() + moveBullet, ships.getY() + moveBullet , 5, 10);
     }
-    else if(ships.getPointDirection() == 90)
+    else if(ships.getPointDirection() > 80 && ships.getPointDirection() < 100 )
     {
-      
+      ellipse(ships.getX(), ships.getY() - moveBullets , 5, 10);
     }
-    
+    else if(ships.getPointDirection() >= 100 && ships.getPointDirection() <= 170)
+    {
+      ellipse(ships.getX() - moveBullet, ships.getY() - moveBullets , 5, 10);
+    }
+    else if(ships.getPointDirection() > 170 && ships.getPointDirection() < 190)
+    {
+      ellipse(ships.getX() - moveBullet, ships.getY(), 5, 10);
+    }
+    else if(ships.getPointDirection() >= 190 && ships.getPointDirection() <= 260)
+    {
+      ellipse(ships.getX() - moveBullet, ships.getY() + moveBullets , 5, 10);
+    }
+    else if(ships.getPointDirection() > 260 && ships.getPointDirection() < 290)
+    {
+      ellipse(ships.getX(), ships.getY() + moveBullets , 5, 10);
+    }
+    else if(ships.getPointDirection() >= 290 && ships.getPointDirection() <= 350)
+    {
+      ellipse(ships.getX() + moveBullet, ships.getY() + moveBullets , 5, 10);
+    }
+    */
     //ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
 
 

@@ -1,4 +1,4 @@
-//Asteroid[] asteroids = new Asteroid[7];
+
 double distances;
 ArrayList <Asteroid> asteroids;
 ArrayList <Bullet> bullets;
@@ -42,10 +42,17 @@ public void draw()
 
   for(int b = 0; b < bullets.size(); b ++)
   {
-    bullets.get(b).move();
-    bullets.get(b).show();
+    
 
+    bullets.get(b).move();
+
+    bullets.get(b).show();
+    bullets.get(b).setPointDirection((int)ships.getPointDirection());
+    
+    
+    
   }
+
 
   for(int ni = 0; ni < asteroids.size(); ni ++)
   {
@@ -62,38 +69,14 @@ public void draw()
     
   }
   
-
-/*
-  for(int ni = 0; ni < asteroids.length; ni ++)
-  {
-    asteroids[ni].move();
-    asteroids[ni].show();
-  }
-  */
- 
-  /*
-  if((get(ships.getX(),ships.getY())) == color(197))
-  {
-
-    ships.setX(0);
-    ships.setY(0);
-    asteroids[0].setX(0);
-    asteroids[0].setY(0);
-    ships.setPointDirection(0);
-    ships.setDirectionX(0);
-    ships.setDirectionY(0);
-
-  }
-  */
-  
 }
 class Bullet extends Floater
 {
   private int moveBullet;
-  private int moveBullets;
+  
   public Bullet()
   {
-    moveBullets = 0;
+    
     moveBullet = 0;
     myCenterX = 200;
     myCenterY = 200;
@@ -104,54 +87,13 @@ class Bullet extends Floater
   }
   public void move()
   {
-    moveBullets = (int)ships.getPointDirection();
-    //moveBullet += 10;
-    moveBullets -= 10;
+    moveBullet += 10;
   }
   
   public void show()
   {
     fill(255, 0, 0);
-    for ( int bi = 0; bi < 370; bi += 10)
-    {
-      ellipse(ships.getX(), ships.getY() , 5, 10);
-    }
-    /*
-    if(ships.getPointDirection() > -10 && ships.getPointDirection() < 10)
-    {
-      ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
-    }
-    else if(ships.getPointDirection() >= 10 && ships.getPointDirection() <= 80)
-    {
-      ellipse(ships.getX() + moveBullet, ships.getY() + moveBullet , 5, 10);
-    }
-    else if(ships.getPointDirection() > 80 && ships.getPointDirection() < 100 )
-    {
-      ellipse(ships.getX(), ships.getY() - moveBullets , 5, 10);
-    }
-    else if(ships.getPointDirection() >= 100 && ships.getPointDirection() <= 170)
-    {
-      ellipse(ships.getX() - moveBullet, ships.getY() - moveBullets , 5, 10);
-    }
-    else if(ships.getPointDirection() > 170 && ships.getPointDirection() < 190)
-    {
-      ellipse(ships.getX() - moveBullet, ships.getY(), 5, 10);
-    }
-    else if(ships.getPointDirection() >= 190 && ships.getPointDirection() <= 260)
-    {
-      ellipse(ships.getX() - moveBullet, ships.getY() + moveBullets , 5, 10);
-    }
-    else if(ships.getPointDirection() > 260 && ships.getPointDirection() < 290)
-    {
-      ellipse(ships.getX(), ships.getY() + moveBullets , 5, 10);
-    }
-    else if(ships.getPointDirection() >= 290 && ships.getPointDirection() <= 350)
-    {
-      ellipse(ships.getX() + moveBullet, ships.getY() + moveBullets , 5, 10);
-    }
-    */
-    //ellipse(ships.getX() + moveBullet, ships.getY(), 5, 10);
-
+    ellipse((int)ships.getX() , (int)ships.getY() , 5, 10);
 
   }
   public void setX(int x) { myCenterX = x;}
@@ -230,6 +172,7 @@ public void keyPressed()
   if(key == 'l')
   {
     bullets.add(new Bullet());
+
   }
   
   

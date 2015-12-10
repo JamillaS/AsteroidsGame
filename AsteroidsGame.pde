@@ -1,5 +1,6 @@
 
 double distances;
+double distab;
 ArrayList <Asteroid> asteroids;
 ArrayList <Bullet> bullets;
 SpaceShip ships = new SpaceShip();
@@ -40,22 +41,24 @@ public void draw()
   ships.move();
   ships.show();
 
-  for(int b = 0; b < bullets.size(); b ++)
-  {
-    
-
-    bullets.get(b).move();
-
-    bullets.get(b).show();
-    bullets.get(b).setPointDirection((int)ships.getPointDirection());
-    
-    
-    
-  }
+  
 
 
   for(int ni = 0; ni < asteroids.size(); ni ++)
   {
+    for(int b = 0; b < bullets.size(); b ++)
+    {
+    //bullets.get(b).move();
+    bullets.get(b).show();
+    bullets.get(b).accelerate(ships.getPointDirection());
+    distab = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(), bullets.get(b).getX(), bullets.get(b).getY());
+      if(distab < 5)
+      {
+        asteroids.remove(ni);
+
+      }
+
+    }
     
     asteroids.get(ni).move();
     asteroids.get(ni).show();
@@ -65,19 +68,16 @@ public void draw()
         asteroids.remove(ni);
 
     }
-
+    
     
   }
   
 }
 class Bullet extends Floater
 {
-  private int moveBullet;
   
   public Bullet()
   {
-    
-    moveBullet = 0;
     myCenterX = 200;
     myCenterY = 200;
     myPointDirection = 0;
@@ -85,15 +85,22 @@ class Bullet extends Floater
     myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
     myDirectionY = 5 * Math.sin(dRadians) + myDirectionY;
   }
-  public void move()
-  {
-    moveBullet += 10;
-  }
-  
+
   public void show()
   {
     fill(255, 0, 0);
-    ellipse((int)ships.getX() , (int)ships.getY() , 5, 10);
+    ellipse((int)ships.getX() + (int)myDirectionX, (int)ships.getY() +  (int)myDirectionY , 5, 10);
+
+
+  }
+  public void accelerate(double dAmount)
+  {
+    //convert the current direction the floater is pointing to radians    
+    double dRadians =ships.getPointDirection()*(Math.PI/180);     
+    //change coordinates of direction of travel    
+    myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
+    myDirectionY = 5 * Math.sin(dRadians) + myDirectionY;
+
 
   }
   public void setX(int x) { myCenterX = x;}

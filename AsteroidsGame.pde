@@ -45,23 +45,35 @@ public void draw()
 
 
   for(int ni = 0; ni < asteroids.size(); ni ++)
-  {
-    for(int b = 0; b < bullets.size(); b ++)
-    {
-    //bullets.get(b).move();
-    bullets.get(b).show();
-    bullets.get(b).accelerate(ships.getPointDirection());
-    distab = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(), bullets.get(b).getX(), bullets.get(b).getY());
-      if(distab < 5)
-      {
-        asteroids.remove(ni);
-
-      }
-
-    }
-    
+  { 
     asteroids.get(ni).move();
     asteroids.get(ni).show();
+    for(int b = 0; b < bullets.size(); b ++)
+    {
+      bullets.get(b).accelerate(ships.getPointDirection());
+      bullets.get(b).move();
+      bullets.get(b).show();
+    
+    
+      
+        distab = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(), bullets.get(b).getX(), bullets.get(b).getY());
+      
+      if(distab < 5)
+      {
+
+        asteroids.remove(ni);
+        bullets.remove(b);
+        
+      }
+      break;
+      
+    }
+     
+    
+
+    
+    
+    
     distances = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(),ships.getX(), ships.getY());
     if(distances < 20)
     {
@@ -85,7 +97,11 @@ class Bullet extends Floater
     myDirectionX = 5 * Math.cos(dRadians) + myDirectionX;
     myDirectionY = 5 * Math.sin(dRadians) + myDirectionY;
   }
-
+  public void move()
+  {
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;
+  }
   public void show()
   {
     fill(255, 0, 0);

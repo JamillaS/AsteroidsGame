@@ -29,56 +29,47 @@ bullets = new ArrayList <Bullet> ();
     stars[j] = new Jumbo();
   }
 }
+
 public void draw() 
 {
   background(0);
   for(int i = 0; i < stars.length; i ++)
   {
-
     stars[i].show();
   }
   
   ships.move();
   ships.show();
 
+  for(int b = 0; b < bullets.size(); b ++)
+  {
+    bullets.get(b).accelerate(ships.getPointDirection());
+    bullets.get(b).move();
+    bullets.get(b).show();
+  }
+
   
 
 
-  for(int ni = 0; ni < asteroids.size(); ni ++)
+  for(int ni = asteroids.size()-1; ni >= 0; ni --)
   { 
     asteroids.get(ni).move();
     asteroids.get(ni).show();
-    for(int b = 0; b < bullets.size(); b ++)
-    {
-      bullets.get(b).accelerate(ships.getPointDirection());
-      bullets.get(b).move();
-      bullets.get(b).show();
-    
-    
-      
-        distab = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(), bullets.get(b).getX(), bullets.get(b).getY());
-      
-      if(distab < 5)
-      {
-
-        asteroids.remove(ni);
-        bullets.remove(b);
-        
-      }
-      break;
-      
-    }
-     
-    
-
-    
-    
-    
+  
     distances = dist(asteroids.get(ni).getX(),asteroids.get(ni).getY(),ships.getX(), ships.getY());
     if(distances < 20)
     {
         asteroids.remove(ni);
+    }
 
+    for(int b = bullets.size()-1; b >= 0; b --)
+    {
+      Asteroid ast = asteroids.get(ni);
+      Bullet tempBullet = bullets.get(b);
+      if (dist((float)ast.myCenterX, (float)ast.myCenterY, (float)tempBullet.myCenterX, (float)tempBullet.myCenterY) < 20) {
+        asteroids.remove(ni);
+        break;
+      }
     }
     
     
@@ -227,9 +218,9 @@ class Asteroid extends Floater
     myColor = color(197);
     myCenterX = ((int)(Math.random() * 400));
     myCenterY = ((int)(Math.random() * 400));
-    myDirectionX = ((int)(Math.random() * 10 - 5));
-    myDirectionY = ((int)(Math.random() * 10 - 5));
-    myPointDirection = ((int)(Math.random() * 10 - 5)); 
+    myDirectionX = ((int)(Math.random() * 6 - 2.5));
+    myDirectionY = ((int)(Math.random() * 6 - 2.5));
+    myPointDirection = ((int)(Math.random() * 6 - 2.5)); 
   }
   public void move()
   {
